@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<table border="1">
+    <tr><th>WyseId</th></tr>
+    <tr th:each="reservableWyseList : ${reservableWyseList}">
+        <td th:text="${reservableWyseList.wyseId}"></td>
+      <tr th:each="reservableWyseList : ${reservableWyseList}">
+         <td th:text="${reservableWyseList.reservableDate}"></td>
+      </tr>
+    </tr>
+</table>
+</body>
+</html>

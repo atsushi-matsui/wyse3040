@@ -15,7 +15,7 @@ class FetchReservableWyseService(
 
         try {
             val reservableWyse = reservableWyseMapper.find(localDateToday, localDateToday.plusWeeks(1))
-            return reservableWyse.groupBy({ it.wyseId },{ it.reservableDate })
+            return reservableWyse.flatMap{ it.wyseId }
 
         } catch (e : Throwable) {
             throw DomainRuntimeException("予約可能なwyse一覧の取得に失敗しました.")

@@ -16,12 +16,12 @@ class WyseController(
     @RequestMapping("reservable")
     fun findReservablebleWyseList(model: Model): String {
         val reservableWyseList = fetchReservableWyseService.findReservableWyse(LocalDate.now())
-        reservableWyseList.map {
-            model.addAttribute(it.key, it.key)
-            model.addAttribute(it.key.plus("ReservableDateList"), it.value)
-
-        }
-        return "wyse/reservable/listReservableWyse"
+        model.addAttribute(reservableWyseList)
+//        reservableWyseList.map {
+//            model.addAttribute(it.key, it.key)
+//            model.addAttribute(it.key.plus("ReservableDateList"), it.value)
+//        }
+        return "reservable/listReservableWyse"
     }
 
     @RequestMapping("reserve")
