@@ -15,19 +15,11 @@ class FetchReservableWyseService(
 
         try {
             val reservableWyse = reservableWyseMapper.find(localDateToday, localDateToday.plusWeeks(1))
-            return reservableWyse.flatMap{ it.wyseId }
+            return reservableWyse.groupBy({ it.wyseId },{ it.reservableDate })
 
         } catch (e : Throwable) {
             throw DomainRuntimeException("予約可能なwyse一覧の取得に失敗しました.")
         }
-
-       // val reservableWyseIdList = reservableWyse.distinctBy { it.wyseId }
-
-//
-//        // 近直１週間のwyseの使用状況をmap関数で定義する
-//        for(wyseId in reservableWyseIdList){
-//            val ttt =  reservableWyse.filter { it.wyseId == wyseId.toString()}
-//        }
     }
 }
 

@@ -12,7 +12,7 @@ interface ReservableWyseMapper {
     @Select("""
         select
          reservable_date,
-         wyse_id,
+         wyse_id
         from
          reservable_wyse
         where

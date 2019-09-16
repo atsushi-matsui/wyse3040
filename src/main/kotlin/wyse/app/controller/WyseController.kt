@@ -10,7 +10,6 @@ import java.time.LocalDate
 @Controller
 @RequestMapping("wyse")
 class WyseController(
-        //private val model: Model,
         private val fetchReservableWyseService: FetchReservableWyseService
 ) {
     @RequestMapping("reservable")
