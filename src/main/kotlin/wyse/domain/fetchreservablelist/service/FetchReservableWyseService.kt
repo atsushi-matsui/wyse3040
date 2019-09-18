@@ -15,6 +15,7 @@ class FetchReservableWyseService(
 
         try {
             val reservableWyse = reservableWyseMapper.find(localDateToday, localDateToday.plusWeeks(1))
+
             return reservableWyse.groupBy({ it.wyseId },{ it.reservableDate })
 
         } catch (e : Throwable) {
