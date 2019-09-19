@@ -1,23 +1,21 @@
 package wyse.domain.fetchreservablelist.service
 
-import wyse.domain.fetchreservablelist.mapper.ReservableWyseMapper
+import wyse.common.mapper.WyseMapper
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import wyse.common.model.Wyse
+import wyse.common.model.WyseStatus
 import wyse.domain.WyseExceptionhandller.DomainRuntimeException
 import java.time.LocalDate
 
 @Service
 @Transactional
-class FetchReservableWyseService(
-        private val reservableWyseMapper: ReservableWyseMapper
+class FetchActivatedWyseService(
+    private val wyseMapper: WyseMapper
 ) {
-    fun findReservableWyse(localDateToday: LocalDate): Map<String, List<LocalDate>>  {
-
+    fun select(localDateToday: LocalDate): List<Wyse> {
         try {
-            val reservableWyse = reservableWyseMapper.find(localDateToday, localDateToday.plusWeeks(1))
-
-            return reservableWyse.groupBy({ it.wyseId },{ it.reservableDate })
-
+            return wyseMapper.select(WyseStatus.ACTIVATED)
         } catch (e : Throwable) {
             throw DomainRuntimeException("予約可能なwyse一覧の取得に失敗しました.")
         }

@@ -6,11 +6,11 @@ data class Wyse (
     val wyseId: String,
     val managementNubmer: String,
     val status: WyseStatus,
-    val reservationDate: Date,
-    val returnDate: Date,
+    val reservationDate: Date?,
+    val returnDate: Date?
     )
 enum class WyseStatus {
-    ACTIVE,
+    ACTIVATED,
     USING,
-    DEACTIVE
+    DEACTIVATED
 }

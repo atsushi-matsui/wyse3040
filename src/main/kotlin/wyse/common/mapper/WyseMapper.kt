@@ -1,23 +1,23 @@
-package wyse.domain.fetchreservablelist.mapper
+package wyse.common.mapper
 
-import wyse.domain.fetchreservablelist.model.ReservableWyse
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Select
-import java.time.LocalDate
+import wyse.common.model.Wyse
+import wyse.common.model.WyseStatus
 
 @Mapper
 interface WyseMapper {
-
-    // 指定日から１週間のwyseの使用状況を取得
     @Select("""
         select
-         reservable_date,
-         wyse_id
+         wyse_id,
+         management_nubmer,
+         status,
+         reservation_date,
+         return_date
         from
-         reservable_wyse
+         wyse
         where
-         reservable_date BETWEEN #{localDateToday} AND #{localDateAfterAWeek}
-        order by wyse_id
+         status = #{wyseStatus}
         """)
-    fun select(localDateToday: LocalDate, localDateAfterAWeek: LocalDate): List<ReservableWyse>
+    fun select(wyseStatus: WyseStatus): List<Wyse>
 }
