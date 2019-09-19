@@ -1,0 +1,1 @@
+GRANT ALL ON wyse3040.* TO 'kiburedo0702'@'%' IDENTIFIED BY 'ztb30830';

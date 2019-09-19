@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|シンクライアント予約状況一覧|"></title>
+</head>
+<body>
+    <table class="list">
+        <tr>
+            <th>ID</th>
+            <th>貸出日</th>
+            <th>返却予定日</th>
+        </tr>
+        <tr th:each="activatedWyseList:${activatedWyseList}" >
+            <td th:text="${activatedWyseList.wyseId}">wyseId</td>
+            <td th:text="${activatedWyseList.reservationDate}">reservationDate</td>
+            <td th:text="${activatedWyseList.returnDate}">returnDate</td>
+       </tr>
+    </table>
+</body>
+</html>

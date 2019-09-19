@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select
 import java.time.LocalDate
 
 @Mapper
-interface ReservableWyseMapper {
+interface WyseMapper {
 
     // 指定日から１週間のwyseの使用状況を取得
     @Select("""
@@ -19,5 +19,5 @@ interface ReservableWyseMapper {
          reservable_date BETWEEN #{localDateToday} AND #{localDateAfterAWeek}
         order by wyse_id
         """)
-    fun find(localDateToday: LocalDate, localDateAfterAWeek: LocalDate): List<ReservableWyse>
+    fun select(localDateToday: LocalDate, localDateAfterAWeek: LocalDate): List<ReservableWyse>
 }
