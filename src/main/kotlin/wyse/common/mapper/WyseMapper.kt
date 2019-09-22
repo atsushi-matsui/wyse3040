@@ -2,7 +2,7 @@ package wyse.common.mapper
 
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Select
-import wyse.common.model.Wyse
+import wyse.common.model.Wyse.WyseForMyBatis
 import wyse.common.model.WyseStatus
 
 @Mapper
@@ -19,5 +19,15 @@ interface WyseMapper {
         where
          status = #{wyseStatus}
         """)
-    fun select(wyseStatus: WyseStatus): List<Wyse>
+    fun select(wyseStatus: WyseStatus): List<WyseForMyBatis>
+
+    @Select("""
+        select
+         wyse_id
+        from
+         wyse
+        where
+         status = 'ACTIVATED'
+        """)
+    fun selectTest(): List<String>
 }

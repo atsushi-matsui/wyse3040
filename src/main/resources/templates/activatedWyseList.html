@@ -2,19 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="|シンクライアント予約状況一覧|"></title>
+    <title th:text="|シンクライアント予約状況|"></title>
 </head>
 <body>
-    <table class="list">
+    <table border="1">
         <tr>
             <th>ID</th>
             <th>貸出日</th>
             <th>返却予定日</th>
         </tr>
-        <tr th:each="activatedWyseList:${activatedWyseList}" >
-            <td th:text="${activatedWyseList.wyseId}">wyseId</td>
-            <td th:text="${activatedWyseList.reservationDate}">reservationDate</td>
-            <td th:text="${activatedWyseList.returnDate}">returnDate</td>
+
+        <tr th:each="wyse : ${activatedWyseList}">
+            <td th:text="${wyse.wyseId}"></td>
+            <td th:text="${#dates.format(wyse.reservationDate, 'yyyy/MM/dd')}"></td>
+            <td th:text="${#dates.format(wyse.returnDate, 'yyyy/MM/dd')}"></td>
        </tr>
     </table>
 </body>

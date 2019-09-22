@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping
 import java.time.LocalDate
 
 @Controller
-@RequestMapping("wyse")
+@RequestMapping("/wyse")
 class WyseController(
         private val fetchActivatedWyseService: FetchActivatedWyseService
 ) {
-    @RequestMapping("activated")
+    @RequestMapping("/activated")
     fun findActivatedWyseList(model: Model): String {
         val activatedWyseList = fetchActivatedWyseService.select(LocalDate.now())
-        model.addAttribute(activatedWyseList)
+        model.addAttribute("activatedWyseList",activatedWyseList)
         return "activatedWyseList"
     }
 
