@@ -14,7 +14,7 @@ import java.util.*
  */
 @Service
 @Transactional
-class ProcessReservationOrder (
+class ProcessReservationOrderService (
         private val reservedMapper: ReservedMapper
 ): BatchProcess {
     override fun process() {
