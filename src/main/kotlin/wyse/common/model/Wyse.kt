@@ -4,6 +4,7 @@ import java.util.*
 
 data class Wyse (
         val wyseId: String,
+        val userId: String,
         val managementNubmer: String,
         val status: WyseStatus,
         val reservationDate: Date?,
@@ -11,6 +12,7 @@ data class Wyse (
     ){
     data class WyseForMyBatis (
             var wyseId: String? = null,
+            var userId: String? = null,
             var managementNubmer: String? = null,
             var status: WyseStatus? = null,
             var reservationDate: Date? = null,
@@ -19,6 +21,7 @@ data class Wyse (
         fun of (): Wyse{
            return  Wyse(
                     wyseId = this.wyseId!!,
+                    userId = this.userId!!,
                     managementNubmer = this.managementNubmer!!,
                     status = this.status!!,
                     reservationDate = this.reservationDate!!,
