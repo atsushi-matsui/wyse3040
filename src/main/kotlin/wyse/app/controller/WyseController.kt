@@ -34,34 +34,38 @@ class WyseController(
     @RequestMapping("/reservation")
     fun reservation(reservationForm: ReservationForm, model: Model): String {
         try {
+            // FIXME userIDとwyseIDがDBに登録済みかチッェクする処理を実装
+
             reservationService.processOrder(reservationForm)
         } catch (e: UnavailableReservationException) {
             model.addAttribute("errorMessage", e.message)
             // FIXME thymeleaf未作成
-            return "error/reservation"
+            return "error/date"
         } catch (e: DomainRuntimeException) {
             model.addAttribute("errorMessage", e.message)
             // FIXME thymeleaf未作成
-            return "error/domain/process"
+            return "error/domain"
         }
         // FIXME thymeleaf未作成
-        return "completed"
+        return "reservation/completed"
     }
 
     @RequestMapping("/returnwyse")
     fun returnWyse (returnForm: ReturnForm, model: Model): String{
         try {
+            // FIXME userIDとwyseIDがDBに登録済みかチッェクする処理を実装
+
             returnWyse.processOrder(returnForm)
         } catch(e: InvalidWyseStatusException) {
             model.addAttribute("errorMessage", e.message)
             // FIXME thymeleaf未作成
-            return "error/reservation"
+            return "error/status"
         } catch (e: DomainRuntimeException) {
             model.addAttribute("errorMessage", e.message)
             // FIXME thymeleaf未作成
-            return "error/domain/process"
+            return "error/domain"
         }
         // FIXME thymeleaf未作成
-        return "completed"
+        return "returnwyse/completed"
     }
 }
