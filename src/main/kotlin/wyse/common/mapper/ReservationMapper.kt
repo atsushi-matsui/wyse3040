@@ -18,15 +18,16 @@ interface ReservationMapper {
          reservation_date,
          return_date
         from
-         reservation
+         reserve
         where
          wyse_id = #{wyseId} and
          status = #{status}
+        order by reservation_date
         """)
     fun selectByWyseIdAndStatus(wyseId: String, status: ReservationStatus): List<ReservationForMyBatis>
 
     @Insert("""
-        insert into reservation(
+        insert into reserve(
          wyse_id,
          user_id,
          status,

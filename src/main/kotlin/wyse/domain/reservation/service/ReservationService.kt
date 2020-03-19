@@ -12,6 +12,10 @@ import wyse.common.model.WyseStatus
 import wyse.domain.WyseExceptionhandller.UnavailableReservationException
 import wyse.domain.WyseExceptionhandller.DomainRuntimeException
 
+
+/**
+ シンクライアント貸出、もしくは予約を行う機能
+ **/
 @Service
 @Transactional
 class ReservationService(
@@ -25,7 +29,7 @@ class ReservationService(
                // 即時予約
                WyseStatus.ACTIVATED -> {
                    reservationMapper.insert(reservationForm, ReservationStatus.COMPLETED)
-                   wyseMapper.updateStatusAndDates(
+                   wyseMapper.updateStatusAndDate(
                            wyseId = reservationForm.wyseId,
                            status = WyseStatus.USING,
                            reservationDate = reservationForm.reservationDate,
@@ -33,44 +37,50 @@ class ReservationService(
 
                    )
                }
-               // 対象のシンクライアントが使用中の場合は仕掛り中のオーダとする
+               // 対象のシンクライアントが使用中の場合は予約オーダを登録する
                WyseStatus.USING -> {
-                   val reservationOrders = reservationMapper.selectByWyseIdAndStatus(reservationForm.wyseId, ReservationStatus.WAITING).map { it.of() }
-                   if(! judgeReservable(reservationForm ,reservationTarget, reservationOrders))
-                       throw UnavailableReservationException("ご希望の予約日は予約済みです.")
+                   val waitingReservedOrders = reservationMapper.selectByWyseIdAndStatus(reservationForm.wyseId, ReservationStatus.WAITING).map { it.of() }
+                   if(! judgeReservable(reservationForm ,reservationTarget, waitingReservedOrders))
+                       throw UnavailableReservationException("ご希望の貸出期間はすでに予約済みです.")
                    reservationMapper.insert(reservationForm, ReservationStatus.WAITING)
                }
-               WyseStatus.DEACTIVATED -> throw UnavailableReservationException("予約希望のシンクライアントは現在使用不可です.")
+               WyseStatus.DEACTIVATED -> throw UnavailableReservationException("利用希望のシンクライアントは現在使用不可です.")
            }
 
-//           val reservatedWyseList = reservationMapper.selectByWyseIdAndStatus(reservationForm.wyseId).map { it.of() }
-//           if(judgeReservable(reservatedWyseList, reservationForm)){
-//               reservationMapper.insert(reservationForm)
-//           } else {
-//               throw AlreadyReservedException("希望の予約時間は予約済みとなっています.")
-//           }
        } catch (e: Throwable){
            throw DomainRuntimeException("テーブル更新中にエラーが発生しました", e)
        }
     }
 
+    /**
+    　現在の使用情報と仕掛かり中の予約オーダ情報を元に予約可能であるかを判定する
+     **/
     private fun judgeReservable(
             currentOrder: ReservationForm,
-            reservationTarget: Wyse,
-            reservationOrders: List<Reservation>): Boolean{
+            wyse: Wyse,
+            waitingReservedOrders: List<Reservation>): Boolean{
 
-        val reservationTargetReservationDate = reservationTarget.reservationDate
-                ?: throw DomainRuntimeException("利用中のシンクライアントに予約日が適用されていません.", null)
-        val reservationTargetReturnDate = reservationTarget.returnDate
-                ?: throw DomainRuntimeException("利用中のシンクライアントに返却日が適用されていません.", null)
-
-        // 仕掛り中のレコードの予約日と返却日が申込中のオーダと重複していないか検査する
-        return if (reservationTargetReturnDate< currentOrder.reservationDate
-                && reservationTargetReservationDate < currentOrder.returnDate) {
-            reservationOrders.all {
-                it.returnDate < currentOrder.reservationDate
-                        && it.reservationDate < currentOrder.returnDate
+        // 指定した利用期間ですでに予約が入っていないかチェック
+        for (idx in waitingReservedOrders.indices) {
+            val startPoint = if (idx == 0) {
+                wyse.returnDate ?: throw DomainRuntimeException("利用中のシンクライアントに予約日が適用されていません.", null)
             }
-        } else { false }
+            else waitingReservedOrders[idx-1].returnDate
+
+            val endPoint = waitingReservedOrders[idx].reservationDate
+
+            val reservableTerm = startPoint..endPoint
+
+            if( reservableTerm.contains(currentOrder.reservationDate)
+                    && reservableTerm.contains(currentOrder.returnDate)
+            ) return true
+        }
+
+         waitingReservedOrders.last().let {
+             if( it.returnDate < wyse.reservationDate )
+                 return true
+         }
+
+        return false
     }
 }

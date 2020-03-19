@@ -13,6 +13,7 @@ import wyse.domain.reservation.service.ReservationService
 import wyse.domain.returnwyse.service.ReturnWyse
 import java.time.LocalDate
 
+// FIXME restControllerに置き換えてバックエンドシステムの実装のみを行う
 @Controller
 @RequestMapping("/wyse")
 class WyseController(
@@ -20,6 +21,10 @@ class WyseController(
         private val reservationService: ReservationService,
         private val returnWyse: ReturnWyse
         ) {
+
+    /**
+      利用可能なwyseの一覧を取得する
+     **/
     @RequestMapping("/activated")
     fun findActivatedWyseList(model: Model): String {
         val activatedWyseList = fetchActivatedWyseService.select(LocalDate.now())
@@ -28,14 +33,12 @@ class WyseController(
     }
 
     /**
-    ここから下はリアルタイムAPI
+      wyse利用の予約オーダを受け取る
      */
-
-    @RequestMapping("/reservation")
-    fun reservation(reservationForm: ReservationForm, model: Model): String {
+    @RequestMapping("/reserve")
+    fun reserve(reservationForm: ReservationForm, model: Model): String {
         try {
             // FIXME userIDとwyseIDがDBに登録済みかチッェクする処理を実装
-
             reservationService.processOrder(reservationForm)
         } catch (e: UnavailableReservationException) {
             model.addAttribute("errorMessage", e.message)
@@ -47,11 +50,14 @@ class WyseController(
             return "error/domain"
         }
         // FIXME thymeleaf未作成
-        return "reservation/completed"
+        return "reserve/completed"
     }
 
-    @RequestMapping("/returnwyse")
-    fun returnWyse (returnForm: ReturnForm, model: Model): String{
+    /**
+      wyse返却の予約オーダを受け取る
+     */
+    @RequestMapping("/return")
+    fun dropOff (returnForm: ReturnForm, model: Model): String{
         try {
             // FIXME userIDとwyseIDがDBに登録済みかチッェクする処理を実装
 

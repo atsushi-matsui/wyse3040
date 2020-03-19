@@ -48,7 +48,7 @@ interface WyseMapper {
         where
          wyse_id = #{wyseId}
         """)
-    fun updateStatusAndDates(
+    fun updateStatusAndDate(
             wyseId: String,
             status: WyseStatus,
             reservationDate: Date?,

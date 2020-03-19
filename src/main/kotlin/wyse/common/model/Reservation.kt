@@ -28,7 +28,10 @@ data class Reservation (
     }
 }
 enum class ReservationStatus{
+    /** 利用待ち **/
     WAITING,
+    /** 利用完了 **/
     COMPLETED,
+    /** 利用キャンセル **/
     CANCELED
 }

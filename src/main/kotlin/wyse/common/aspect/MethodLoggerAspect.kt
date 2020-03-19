@@ -6,10 +6,10 @@ import org.aspectj.lang.annotation.AfterThrowing
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.springframework.stereotype.Component
-import javax.swing.text.html.HTML.Tag.P
 
 @Aspect
 @Component
+// FIXME ドメイン層のクラスにAOPを入れ込むことを検討
 class MethodLoggerAspect {
 
     //domain直下とその配下パッケージでAspect処理を実行

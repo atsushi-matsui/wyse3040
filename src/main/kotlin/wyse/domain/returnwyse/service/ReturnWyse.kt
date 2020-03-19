@@ -10,6 +10,9 @@ import wyse.common.model.WyseStatus
 import wyse.domain.WyseExceptionhandller.DomainRuntimeException
 import wyse.domain.WyseExceptionhandller.InvalidWyseStatusException
 
+/**
+ シンクライアントの返却を行う機能
+ **/
 @Service
 @Transactional
 class ReturnWyse (
@@ -24,7 +27,7 @@ class ReturnWyse (
             when (returnTarget.status) {
                 WyseStatus.USING -> {
                     returnOrderMapper.insert(returnForm, ReturnStatus.COMPLETED)
-                    wyseMapper.updateStatusAndDates(
+                    wyseMapper.updateStatusAndDate(
                             wyseId = returnForm.wyseId,
                             status = WyseStatus.ACTIVATED,
                             reservationDate = null,

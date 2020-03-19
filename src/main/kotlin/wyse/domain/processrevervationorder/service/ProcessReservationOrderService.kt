@@ -19,11 +19,21 @@ class ProcessReservationOrderService (
 ): BatchProcess {
     override fun process() {
         try {
+            val test = reservedMapper.selectByReturnDate().map { it.of() }
+                    .asSequence()
+                    .groupBy { it.wyseId }
+            test.let {
+
+            }
+
             reservedMapper.selectByReturnDate().map { it.of() }
                     .asSequence()
                     .groupBy { it.wyseId }
                     .forEach {
-                        val firstReservation = it.value.firstOrNull() ?: return
+                        val firstReservation = it.value
+                                .asSequence()
+                                .sortedBy { reservation ->  reservation.reservationDate }
+                                .firstOrNull() ?: return
                         reservedMapper.updateWyse(
                                 wyseId = firstReservation.wyseId,
                                 status = WyseStatus.ACTIVATED,

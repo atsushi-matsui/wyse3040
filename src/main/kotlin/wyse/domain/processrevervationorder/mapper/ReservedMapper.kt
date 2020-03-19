@@ -12,18 +12,18 @@ import java.util.*
 interface ReservedMapper {
     @Select("""
         select
-         reservation.wyse_id,
-         reservation.user_id,
-         reservation.status,
-         reservation.reservation_date,
-         reservation.return_date
+         reserve.wyse_id,
+         reserve.user_id,
+         reserve.status,
+         reserve.reservation_date,
+         reserve.return_date
         from
-         reservation
+         reserve
         inner join wyse
-        on reservation.wyse_id = wyse.wyse_id
+        on reserve.wyse_id = wyse.wyse_id
         where
          wyse.status in ('ACTIVATED') and
-         reservation.status in ('WAITING')
+         reserve.status in ('WAITING')
         order by wyse_id, return_date asc;
         """)
     fun selectByReturnDate(): List<ReservationForMyBatis>
@@ -45,7 +45,7 @@ interface ReservedMapper {
     ): Int
 
     @Update("""
-        update reservation
+        update reserve
         set
          status= #{status},
         where

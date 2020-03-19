@@ -32,7 +32,10 @@ data class Wyse (
 
 }
 enum class WyseStatus {
+    /** 利用可能 **/
     ACTIVATED,
+    /**　 **/
     USING,
+    /**　故障 **/
     DEACTIVATED
 }
