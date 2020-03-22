@@ -3,9 +3,9 @@ package wyse.domain.processrevervationorder.mapper
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Select
 import org.apache.ibatis.annotations.Update
-import wyse.common.model.Reservation.ReservationForMyBatis
-import wyse.common.model.ReservationStatus
-import wyse.common.model.WyseStatus
+import wyse.common.model.entity.Reservation.ReservationForMyBatis
+import wyse.common.model.entity.ReservationStatus
+import wyse.common.model.entity.WyseStatus
 import java.util.*
 
 @Mapper

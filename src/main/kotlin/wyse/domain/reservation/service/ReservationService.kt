@@ -5,10 +5,10 @@ import org.springframework.transaction.annotation.Transactional
 import wyse.app.controller.model.ReservationForm
 import wyse.common.mapper.ReservationMapper
 import wyse.common.mapper.WyseMapper
-import wyse.common.model.Reservation
-import wyse.common.model.ReservationStatus
-import wyse.common.model.Wyse
-import wyse.common.model.WyseStatus
+import wyse.common.model.entity.Reservation
+import wyse.common.model.entity.ReservationStatus
+import wyse.common.model.entity.Wyse
+import wyse.common.model.entity.WyseStatus
 import wyse.domain.WyseExceptionhandller.UnavailableReservationException
 import wyse.domain.WyseExceptionhandller.DomainRuntimeException
 

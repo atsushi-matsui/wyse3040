@@ -3,11 +3,10 @@ package wyse.domain.processrevervationorder.service
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import wyse.BatchProcess
-import wyse.common.model.Reservation
-import wyse.common.model.ReservationStatus
-import wyse.common.model.WyseStatus
+import wyse.common.model.entity.Reservation
+import wyse.common.model.entity.ReservationStatus
+import wyse.common.model.entity.WyseStatus
 import wyse.domain.processrevervationorder.mapper.ReservedMapper
-import java.util.*
 
 /**
   シンクライアントが空き状態なら仕掛り中の予約オーダを処理する

@@ -1,4 +1,4 @@
-package wyse.common.model
+package wyse.common.model.entity
 
 import java.util.Date
 
@@ -14,12 +14,12 @@ class ReturnOrder(
             val returnStatus: ReturnStatus? = null,
             val returnDate: Date? = null
     ){
-        fun of(): ReturnOrder{
+        fun of(): ReturnOrder {
             return ReturnOrder(
-                    wyseId = this.wyseId !!,
-                    userId = this.userId !!,
-                    returnStatus = this.returnStatus !!,
-                    returnDate = this.returnDate !!
+                    wyseId = this.wyseId!!,
+                    userId = this.userId!!,
+                    returnStatus = this.returnStatus!!,
+                    returnDate = this.returnDate!!
             )
         }
     }

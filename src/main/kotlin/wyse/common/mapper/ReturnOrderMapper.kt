@@ -3,7 +3,7 @@ package wyse.common.mapper
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.Mapper
 import wyse.app.controller.model.ReturnForm
-import wyse.common.model.ReturnStatus
+import wyse.common.model.entity.ReturnStatus
 
 @Mapper
 interface ReturnOrderMapper {

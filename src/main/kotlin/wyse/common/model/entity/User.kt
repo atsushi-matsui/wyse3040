@@ -1,4 +1,4 @@
-package wyse.common.model
+package wyse.common.model.entity
 
 import javax.persistence.Entity
 import javax.persistence.Id

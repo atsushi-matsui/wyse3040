@@ -3,8 +3,8 @@ package wyse.domain.fetchreservablelist.service
 import wyse.common.mapper.WyseMapper
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import wyse.common.model.Wyse
-import wyse.common.model.WyseStatus
+import wyse.common.model.entity.Wyse
+import wyse.common.model.entity.WyseStatus
 import wyse.domain.WyseExceptionhandller.DomainRuntimeException
 import java.time.LocalDate
 

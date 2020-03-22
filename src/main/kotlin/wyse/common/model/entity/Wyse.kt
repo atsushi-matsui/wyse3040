@@ -1,4 +1,4 @@
-package wyse.common.model
+package wyse.common.model.entity
 
 import java.util.*
 
@@ -18,15 +18,15 @@ data class Wyse (
             var reservationDate: Date? = null,
             var returnDate: Date? = null
     ){
-        fun of (): Wyse{
-           return  Wyse(
-                    wyseId = this.wyseId!!,
-                    userId = this.userId!!,
-                    managementNubmer = this.managementNubmer!!,
-                    status = this.status!!,
-                    reservationDate = this.reservationDate!!,
-                    returnDate = this.returnDate!!
-            )
+        fun of (): Wyse {
+           return Wyse(
+                   wyseId = this.wyseId!!,
+                   userId = this.userId!!,
+                   managementNubmer = this.managementNubmer!!,
+                   status = this.status!!,
+                   reservationDate = this.reservationDate!!,
+                   returnDate = this.returnDate!!
+           )
         }
     }
 

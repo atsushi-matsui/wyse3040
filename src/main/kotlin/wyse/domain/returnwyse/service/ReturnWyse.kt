@@ -5,8 +5,8 @@ import org.springframework.transaction.annotation.Transactional
 import wyse.app.controller.model.ReturnForm
 import wyse.common.mapper.ReturnOrderMapper
 import wyse.common.mapper.WyseMapper
-import wyse.common.model.ReturnStatus
-import wyse.common.model.WyseStatus
+import wyse.common.model.entity.ReturnStatus
+import wyse.common.model.entity.WyseStatus
 import wyse.domain.WyseExceptionhandller.DomainRuntimeException
 import wyse.domain.WyseExceptionhandller.InvalidWyseStatusException
 

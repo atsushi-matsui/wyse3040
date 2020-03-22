@@ -4,8 +4,8 @@ import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Select
 import wyse.app.controller.model.ReservationForm
-import wyse.common.model.Reservation.ReservationForMyBatis
-import wyse.common.model.ReservationStatus
+import wyse.common.model.entity.Reservation.ReservationForMyBatis
+import wyse.common.model.entity.ReservationStatus
 
 @Mapper
 interface ReservationMapper {

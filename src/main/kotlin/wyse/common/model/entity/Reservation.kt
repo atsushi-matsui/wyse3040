@@ -1,4 +1,4 @@
-package wyse.common.model
+package wyse.common.model.entity
 
 import java.util.Date
 
@@ -16,13 +16,13 @@ data class Reservation (
             val reservationDate: Date? = null,
             val returnDate: Date? = null
     ){
-        fun of(): Reservation{
+        fun of(): Reservation {
             return Reservation(
-                    wyseId = this.wyseId !!,
-                    userId = this.userId !!,
-                    reservationStatus = this.reservationStatus !!,
-                    reservationDate = this.reservationDate !!,
-                    returnDate = this.returnDate !!
+                    wyseId = this.wyseId!!,
+                    userId = this.userId!!,
+                    reservationStatus = this.reservationStatus!!,
+                    reservationDate = this.reservationDate!!,
+                    returnDate = this.returnDate!!
             )
         }
     }

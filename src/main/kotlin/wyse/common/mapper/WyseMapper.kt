@@ -3,8 +3,8 @@ package wyse.common.mapper
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Select
 import org.apache.ibatis.annotations.Update
-import wyse.common.model.Wyse.WyseForMyBatis
-import wyse.common.model.WyseStatus
+import wyse.common.model.entity.Wyse.WyseForMyBatis
+import wyse.common.model.entity.WyseStatus
 import java.util.*
 
 @Mapper
