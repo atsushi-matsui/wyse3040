@@ -18,7 +18,7 @@ interface ReservedMapper {
          reserve.reservation_date,
          reserve.return_date
         from
-         reserve
+         reservation_operation
         inner join wyse
         on reserve.wyse_id = wyse.wyse_id
         where

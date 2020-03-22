@@ -18,7 +18,7 @@ interface ReservationMapper {
          reservation_date,
          return_date
         from
-         reserve
+         reservation_operation
         where
          wyse_id = #{wyseId} and
          status = #{status}
@@ -26,6 +26,7 @@ interface ReservationMapper {
         """)
     fun selectByWyseIdAndStatus(wyseId: String, status: ReservationStatus): List<ReservationForMyBatis>
 
+    // FIXME アプリで採番したシーケンス番号をtransactionIdとして登録
     @Insert("""
         insert into reserve(
          wyse_id,

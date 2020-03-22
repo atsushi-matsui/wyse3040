@@ -32,9 +32,10 @@ CREATE TABLE IF NOT EXISTS wyse
 );
 
 -- reservation
-DROP TABLE IF EXISTS reservation;
-CREATE TABLE IF NOT EXISTS reservation
+DROP TABLE IF EXISTS reservation_operation;
+CREATE TABLE IF NOT EXISTS reservation_operation
 (
+    transaction_id VARCHAR(255) NOT NULL auto_increment,
     wyse_id VARCHAR(255) NOT NULL,
     user_id VARCHAR(255) NOT NULL,
     status ENUM('WAITING','COMPLETED','CANCELED') NOT NULL,
@@ -48,8 +49,8 @@ CREATE TABLE IF NOT EXISTS reservation
 );
 
 -- return_order
-DROP TABLE IF EXISTS return_order;
-CREATE TABLE IF NOT EXISTS return_order
+DROP TABLE IF EXISTS return_operation;
+CREATE TABLE IF NOT EXISTS return_operation
 (
     transaction_id VARCHAR(255) NOT NULL auto_increment,
     wyse_id VARCHAR(255) NOT NULL,

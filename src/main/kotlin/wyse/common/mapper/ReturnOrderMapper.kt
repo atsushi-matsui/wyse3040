@@ -8,7 +8,7 @@ import wyse.common.model.entity.ReturnStatus
 @Mapper
 interface ReturnOrderMapper {
     @Insert("""
-        insert into return_order(
+        insert into return_operation(
          wyse_id,
          user_id,
          status,
