@@ -23,12 +23,7 @@ class RestApiComponent(
 
         // FIXME runCatchingに変更を検討
         try {
-            val responseEntity = myRestTemplate.exchange(
-                    URI.create("https://api.sendgrid.com/v3/mail/send"),
-                    HttpMethod.POST,
-                    requestEntity,
-                    response.javaClass
-            )
+            val responseEntity = myRestTemplate.exchange(requestEntity, response.javaClass)
 
             return responseEntity.body
                     // FIXME 意味のある例外に変更

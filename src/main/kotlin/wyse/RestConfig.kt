@@ -9,18 +9,13 @@ import org.springframework.web.client.RestTemplate
 
 @Configuration
 class RestConfig(
-        private val myObjectMapper: ObjectMapper,
-        private val mappingJacksonHttpConverter: MappingJackson2HttpMessageConverter
+        private val myObjectMapper: ObjectMapper
 ) {
 
     @Bean
     fun myRestTemplate(): RestTemplate {
-        return RestTemplate(listOf(mappingJacksonHttpConverter))
-    }
-
-    @Bean
-    fun mappingJacksonHttpConverter(): MappingJackson2HttpMessageConverter {
-        return MappingJackson2HttpMessageConverter(myObjectMapper)
+        val converter = MappingJackson2HttpMessageConverter(myObjectMapper)
+        return RestTemplate(listOf(converter))
     }
 
     @Bean
