@@ -1,0 +1,11 @@
+# ローカル環境用
+datasource:
+  url: jdbc:mysql://localhost:3306/wyse3040
+  username: kiburedo0702
+  password: ztb30830
+  driver-class-name: com.mysql.jdbc.Driver
+
+sendgrid:
+  url: https://api.sendgrid.com/v3/mail/send
+  auth: auth.local
+

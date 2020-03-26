@@ -1,0 +1,10 @@
+# 商用環境用（未設定）
+datasource:
+  url: jdbc:mysql://xxx
+  username: xxx
+  password: xxx
+  driver-class-name: com.mysql.jdbc.Driver
+
+sendgrid:
+  url: https://api.sendgrid.com/v3/mail/send
+  auth: auth.release
